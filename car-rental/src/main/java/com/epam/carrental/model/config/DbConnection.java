@@ -13,7 +13,7 @@ import com.epam.carrental.util.propertiesReader;
 public class DbConnection {
 
 	private static final Logger LOGGER = LogManager.getLogger();
-	private static final String PROPERTIES_DB_FILE = "src/main/resources/dbconnection.properties";
+	private static final String PROPERTIES_DB_FILE = "src/main/ressource/application.properties";
 	private static final String URL = "jdbcUrl";
 	private static final String USER = "postgres.username";
 	private static final String PASSWORD = "postgres.password";
