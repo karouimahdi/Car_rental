@@ -27,7 +27,7 @@ public class App {
 
 		List<User> users = userDao.getAllItems();
 	    for(int i=0;i<users.size();i++) {
-	    	System.out.println("1");
+		    System.out.println(users.get(i));
 	    }
 
 		System.out.println("============================ SELECT BY ID ===============================");
@@ -39,21 +39,30 @@ public class App {
 		System.out.println("Deleted Status: " + userDao.deleteItem(10));
 		List<User> usersAfterDelete = userDao.getAllItems();
 		for(int i=0;i<users.size();i++) {
-	    	System.out.println("1");
+		    System.out.println(usersAfterDelete.get(i));
 	    }
 
 		System.out.println("============================ UPDATE ===============================");
 		User userBeforeUpdate = userDao.getItemById(2);
 		System.out.println(" userBeforeUpdate: " + userBeforeUpdate);
 		User updateUser = new User(2, "userName", " ", "userPassword", "userAddress", false, UserRole.ADMIN);
-		System.out.println("Updated Status: " + userDao.updateItem(updateUser));
+		//System.out.println("Updated Status: " + userDao.updateItem(updateUser));
+		userDao.updateItem(updateUser);
 		User userAfterUpdate = userDao.getItemById(2);
 		System.out.println(" userAfterUpdate: " + userAfterUpdate);
 		System.out.println("============================ INSERT  ===============================");
+		//User newuser = new User("userName", "New UserEmail", "userPassword", "userAddress", false, UserRole.ADMIN);
+		//System.out.println("Insert Starus: " + userDao.insertItem(newuser));
+		//userDao.insertItem(newuser);
+		//List<User> userNew = userDao.getAllItems();
+		//userNew.forEach(System.out::println);
 		User newuser = new User("userName", "New UserEmail", "userPassword", "userAddress", false, UserRole.ADMIN);
 		System.out.println("Insert Starus: " + userDao.insertItem(newuser));
 		List<User> userNew = userDao.getAllItems();
-		//userNew.forEach(System.out::println);
+		//userNew.forEach(System.out::println)
+		for(int i=0;i<userNew.size();i++){
+		    System.out.println(userNew.get(i));
+		} 
 		
 	}
 	

@@ -20,27 +20,28 @@ public class UserDao implements genericDao<User> {
 	private static final Logger LOGGER = LogManager.getLogger();
 
 	private Connection connection = new DbConnection().getConnection();
-	private static final String INSERT_USER = "INSERT INTO user_table(user_name,	user_email,	user_password,user_adress,user_blocked,user_role)"
-			+ "VALUES(?,?,?,?,?,?)";
+
+	private static final String INSERT_USER = "INSERT INTO user_table (user_name, user_email, user_password, user_address, user_blocked, user_role)"
+			+ " VALUES(?, ?, ?, ?, ?, ?)";
 	private static final String UPDATE_USER = "UPDATE user_table SET user_name=?,	user_email=?,	user_password=?,user_adress=?,user_blocked=?,user_role=? WHERE user_id=?";
 
 	@Override
-	public int insertItem(User item) {
+	public int insertItem(final User item) {
 		try {
-			PreparedStatement preparedStatement = connection.prepareStatement("");
+			PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USER);
 			preparedStatement.setString(1, item.getUserName());
 			preparedStatement.setString(2, item.getUserEmail());
 			preparedStatement.setString(3, item.getUserPassword());
 			preparedStatement.setString(4, item.getUserAdress());
 			preparedStatement.setBoolean(5, item.isUserBlocked());
 			preparedStatement.setString(6, item.getUserRole().name());
+
 			return preparedStatement.executeUpdate();
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
@@ -96,9 +97,9 @@ public class UserDao implements genericDao<User> {
 
 	@Override
 	public int updateItem(final User item) {
+
 		try {
-			PreparedStatement preparedStatement = connection.prepareStatement("");
-			
+			PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_USER);
 			preparedStatement.setString(1, item.getUserName());
 			preparedStatement.setString(2, item.getUserEmail());
 			preparedStatement.setString(3, item.getUserPassword());
@@ -106,23 +107,21 @@ public class UserDao implements genericDao<User> {
 			preparedStatement.setBoolean(5, item.isUserBlocked());
 			preparedStatement.setString(6, item.getUserRole().name());
 			preparedStatement.setLong(7, item.getUserId());
+
 			return preparedStatement.executeUpdate();
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		// TODO Auto-generated method stub
 		return 0;
 	}
-
 	@Override
 	public int deleteItem(final long id) {
 		// TODO Auto-generated method stub
-		
+		PreparedStatement preparedStatement;
 		try {
-			PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM user_table WHERE user_id = ?" );
+		     preparedStatement = connection.prepareStatement("DELETE FROM user_table WHERE user_id = ?" );
 			preparedStatement.setLong(1, id);
 			return preparedStatement.executeUpdate();
 		} catch (SQLException e) {
